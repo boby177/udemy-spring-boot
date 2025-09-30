@@ -1,4 +1,4 @@
-## I take online course on Udemy learn Java Spring Boot
+## Online Course Udemy Java Spring Boot
 
 This course created by Chad Darby, i learned from basic of Spring Boot using IDE InteliJ. <br>
 The course length is 35 hours with 13 sections. <br><br>
