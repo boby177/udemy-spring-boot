@@ -2,9 +2,12 @@ package com.bob.cruddemo.dao;
 
 import com.bob.cruddemo.entity.Student;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Repository
 public class StudentDAOImpl implements StudentDAO {
@@ -28,6 +31,27 @@ public class StudentDAOImpl implements StudentDAO {
     @Override
     public Student findById(Integer id) {
         return entityManager.find(Student.class, id);
+    }
+
+    @Override
+    public List<Student> findAll() {
+        // Create query find all students
+        TypedQuery<Student> theQuery = entityManager.createQuery("FROM Student ORDER BY firstName ASC", Student.class);
+
+        // Return query results
+        return theQuery.getResultList();
+    }
+
+    @Override
+    public List<Student> findByLastName(String lastName) {
+        // Create query get student by last name
+        TypedQuery<Student> theQuery = entityManager.createQuery("FROM Student WHERE lastName=:theData", Student.class);
+
+        // Set query parameters
+        theQuery.setParameter("theData", lastName);
+
+        // Return query results
+        return theQuery.getResultList();
     }
 }
 
