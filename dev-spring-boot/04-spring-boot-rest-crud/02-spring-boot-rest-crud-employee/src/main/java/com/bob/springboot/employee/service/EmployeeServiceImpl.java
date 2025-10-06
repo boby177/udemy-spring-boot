@@ -3,6 +3,7 @@ package com.bob.springboot.employee.service;
 import com.bob.springboot.employee.dao.EmployeeDAO;
 import com.bob.springboot.employee.entity.Employee;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,5 +19,22 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<Employee> findAll() {
         return employeeDAO.findAll();
+    }
+
+    @Override
+    public Employee findById(int id) {
+        return employeeDAO.findById(id);
+    }
+
+    @Override
+    @Transactional
+    public Employee save(Employee theEmployee) {
+        return employeeDAO.save(theEmployee);
+    }
+
+    @Override
+    @Transactional
+    public void deleteById(int id) {
+        employeeDAO.deleteById(id);
     }
 }
