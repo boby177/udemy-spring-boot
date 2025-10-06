@@ -3,21 +3,26 @@ package com.bob.springboot.employee.rest;
 import com.bob.springboot.employee.entity.Employee;
 import com.bob.springboot.employee.service.EmployeeService;
 import com.bob.springboot.employee.service.EmployeeServiceImpl;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
 public class EmployeeRestController {
 
     private EmployeeService employeeService;
+    private ObjectMapper objectMapper;
 
-    // Inject employee DAO (use constructor injection)
+    // Inject employee DAO (use constructor injection) and object mapper
     @Autowired
-    public EmployeeRestController(EmployeeServiceImpl theEmployeeService) {
+    public EmployeeRestController(EmployeeServiceImpl theEmployeeService, ObjectMapper theObjectMapper) {
         employeeService = theEmployeeService;
+        objectMapper = theObjectMapper;
     }
 
     // Expose "/employees" and return a list of employees
@@ -51,11 +56,47 @@ public class EmployeeRestController {
         return newEmployee;
     }
 
+    // New endpoint PUT update data employee
     @PutMapping("/employees")
     public Employee updateEmployee(@RequestBody Employee theEmployee) {
         // Using same method on save as add new employee endpoint
         Employee updateEmployee = employeeService.save(theEmployee);
 
         return updateEmployee;
+    }
+
+    // New endpoint PATCH update several data employee
+    @PatchMapping("/employees/{employeeId}")
+    public Employee updatePatchEmployee(@PathVariable int employeeId,
+                                        @RequestBody Map<String, Object> patchPayload){
+        Employee tempEmployee = employeeService.findById(employeeId);
+
+        // Throw exception if data not found
+        if (tempEmployee == null) {
+            throw new RuntimeException("Employee id not found - " + employeeId);
+        }
+
+        // throw exception if request body contains "id" key
+        if (patchPayload.containsKey("id")) {
+            throw new RuntimeException("Employee id not allowed in request body - " + employeeId);
+        }
+        
+        Employee patchedEmployee = apply(patchPayload, tempEmployee);
+        Employee dbEmployee = employeeService.save(patchedEmployee);
+
+        return dbEmployee;
+    }
+
+    private Employee apply(Map<String, Object> patchPayload, Employee tempEmployee) {
+        // Convert employee object to a JSON object node
+        ObjectNode employeeNode = objectMapper.convertValue(tempEmployee, ObjectNode.class);
+
+        // Convert the patchPayload map to a JSON object node
+        ObjectNode patchNode = objectMapper.convertValue(patchPayload, ObjectNode.class);
+
+        // Merge the patch updates into the employee node
+        employeeNode.setAll(patchNode);
+
+        return objectMapper.convertValue(employeeNode, Employee.class);
     }
 }
