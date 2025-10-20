@@ -16,7 +16,7 @@ public class StudentController {
         // Create a new student object
         Student theStudent = new Student();
 
-        // Ad student object to the model
+        // Add student object to the model
         theModel.addAttribute("student", theStudent);
 
         return "student-form";
