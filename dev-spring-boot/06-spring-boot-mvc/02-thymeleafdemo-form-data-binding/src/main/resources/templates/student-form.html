@@ -42,6 +42,18 @@
     <!--    <input type="radio" th:field="*{favoriteLanguage}" th:value="PHP">PHP </input>-->
 
     <br><br>
+    Favorite Operating System:
+
+<!--    <input type="checkbox" th:field="*{favoriteOperatingSystem}" th:value="'Microsoft Windows'"> Microsoft Windows </input>-->
+<!--    <input type="checkbox" th:field="*{favoriteOperatingSystem}" th:value="Linux"> Linux </input>-->
+<!--    <input type="checkbox" th:field="*{favoriteOperatingSystem}" th:value="Mac"> MacOS </input>-->
+
+    <!--  Loop data value based on application properties data  -->
+    <input type="checkbox" th:field="*{favoriteOperatingSystem}"
+           th:each="tempSystem: ${systems}"
+           th:value="${tempSystem}"
+           th:text="${tempSystem}"/>
+    <br><br>
 
     <input type="submit" value="Submit"/>
 
