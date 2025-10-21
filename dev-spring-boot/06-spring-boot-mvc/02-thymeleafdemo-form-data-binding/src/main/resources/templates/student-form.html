@@ -22,9 +22,24 @@
     <select th:field="*{country}">
         <option th:each="tempCountry : ${countries}"
                 th:value="${tempCountry}"
-                th:text="${tempCountry}" />
+                th:text="${tempCountry}"/>
 
     </select>
+
+    <br><br>
+
+    Favorite Programming Language:
+
+    <!--  Loop data value based on application properties data  -->
+    <input type="radio" th:field="*{favoriteLanguage}"
+           th:each="tempLang: ${languages}"
+           th:value="${tempLang}"
+           th:text="${tempLang}"/>
+
+    <!--  Hard Code value  -->
+    <!--    <input type="radio" th:field="*{favoriteLanguage}" th:value="Javascript">Javascript </input>-->
+    <!--    <input type="radio" th:field="*{favoriteLanguage}" th:value="Java">Java </input>-->
+    <!--    <input type="radio" th:field="*{favoriteLanguage}" th:value="PHP">PHP </input>-->
 
     <br><br>
 
