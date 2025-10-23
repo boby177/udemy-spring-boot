@@ -1,20 +1,21 @@
 package com.bob.springdemo.mvc;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 public class Customer {
     private String firstName;
 
     @NotNull(message = "is required")
-    @Size(min=1, message = "is required")
+    @Size(min = 1, message = "is required")
     private String lastName = "";
 
-    @Min(value=0, message = "The value cannot less than 0")
-    @Max(value=10, message = "The value cannot greater than 10")
+    @Min(value = 0, message = "The value cannot less than 0")
+    @Max(value = 10, message = "The value cannot greater than 10")
     private int freePasses;
+
+    // Regular Expression validations
+    @Pattern(regexp = "^[a-zA-Z0-9]{5}", message = "Only 5 characters")
+    private String postalCode;
 
     public String getFirstName() {
         return firstName;
@@ -38,5 +39,13 @@ public class Customer {
 
     public void setFreePasses(int freePasses) {
         this.freePasses = freePasses;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 }
