@@ -17,7 +17,7 @@
 
     First Name: <input type="text" th:field="*{firstName}"/>
     <br><br>
-    Last Name: <input type="text" th:field="*{lastName}"/>
+    Last Name (*): <input type="text" th:field="*{lastName}"/>
 
     <!--  Add error message (if present)  -->
     <span th:if="${#fields.hasErrors('lastName')}"
@@ -26,7 +26,7 @@
 
     <br><br>
 
-    Free Passes:
+    Free Passes (*):
     <input type="text" th:field="*{freePasses}"/>
 
     <!--  Add error message (if present)  -->
