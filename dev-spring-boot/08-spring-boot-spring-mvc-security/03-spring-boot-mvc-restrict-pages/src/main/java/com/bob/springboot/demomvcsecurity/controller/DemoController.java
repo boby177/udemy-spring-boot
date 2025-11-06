@@ -12,7 +12,12 @@ public class DemoController {
     }
 
     @GetMapping("/leaders")
-    public String leaders() {
+    public String showLeaders() {
         return "leaders";
+    }
+
+    @GetMapping("/systems")
+    public String showSystems() {
+        return "systems";
     }
 }
