@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/org/exras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Bob Company Home Page</title>
+</head>
+<body>
+<h2>Bob Company Home Page</h2>
+<hr>
+<p>
+    Welcome to Bob company home page!
+</p>
+
+<hr>
+<!--Display Username and Role-->
+User: <span sec:authentication="principal.username"></span>
+
+<br><br>
+Roles: <span sec:authentication="principal.authorities"></span>
+<hr>
+<!--Add a link to point to /leaders ... role for the managers only -->
+<p>
+    <a th:href="@{/leaders}">Leadership Meeting</a>
+    (Only for Manager peeps)
+</p>
+
+<hr>
+
+<br><br>
+
+<form action="#" th:action="@{/logout}" method="POST">
+
+    <input type="submit" value="Logout"/>
+</form>
+
+</body>
+</html>
