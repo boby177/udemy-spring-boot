@@ -18,19 +18,25 @@ User: <span sec:authentication="principal.username"></span>
 
 <br><br>
 Roles: <span sec:authentication="principal.authorities"></span>
-<hr>
-<!--Add a link to point to /leaders ... role for the managers only -->
-<p>
-    <a th:href="@{/leaders}">Leadership Meeting</a>
-    (Only for Manager peeps)
-</p>
 
-<!--Add a link to point to /systems . . . . only role for the admin -->
-<p>
-    <a th:href="@{/systems}">IT Systems Meeting</a>
-    (Only for Admin peeps)
-</p>
+<div sec:authorize="hasRole('MANAGER')">
 
+    <!--Add a link to point to /leaders ... role for the managers only -->
+    <p>
+        <a th:href="@{/leaders}">Leadership Meeting</a>
+        (Only for Manager peeps)
+    </p>
+
+</div>
+
+<div sec:authorize="hasRole('ADMIN')">
+    <!--Add a link to point to /systems . . . . only role for the admin -->
+    <p>
+        <a th:href="@{/systems}">IT Systems Meeting</a>
+        (Only for Admin peeps)
+    </p>
+
+</div>
 <hr>
 
 <br><br>
