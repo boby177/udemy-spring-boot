@@ -25,13 +25,23 @@ public class CruddemoApplication {
 
     private void createInsructor(AppDAO appDAO) {
 
+        /*
         // create the instructor
         Instructor tempInstructor = new Instructor("Boby", "Maulana", "boby.ms378@gmail.com");
 
         // create the instructor detail
         InstructorDetail tempInstructorDetail = new InstructorDetail(
-                "http://www.youube.com/bob.gamings",
+                "http://www.youtube.com/bob.gamings",
                 "Video Game");
+         */
+
+        // create the instructor
+        Instructor tempInstructor = new Instructor("Sakura", "Rara", "saku.rara@gmail.com");
+
+        // create the instructor detail
+        InstructorDetail tempInstructorDetail = new InstructorDetail(
+                "http://www.youtube.com/saku.rara",
+                "Gardening");
 
         // associate the object 1 to 1 relationship
         tempInstructor.setInstructorDetail(tempInstructorDetail);

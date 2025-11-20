@@ -11,7 +11,7 @@ public class Instructor {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "first_names")
+    @Column(name = "first_name")
     private String firstName;
 
     @Column(name = "last_name")
