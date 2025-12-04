@@ -1,6 +1,7 @@
 package com.bob.cruddemo;
 
 import com.bob.cruddemo.dao.AppDAO;
+import com.bob.cruddemo.entity.Course;
 import com.bob.cruddemo.entity.Instructor;
 import com.bob.cruddemo.entity.InstructorDetail;
 import org.springframework.boot.CommandLineRunner;
@@ -23,9 +24,39 @@ public class CruddemoApplication {
             // findInstructor(appDAO);
             // deleteInstructor(appDAO);
 
-            //findInstructorDetail(appDAO);
-            deleteInstructorDetail(appDAO);
+            // findInstructorDetail(appDAO);
+            // deleteInstructorDetail(appDAO);
+
+            createInstructorWithCourses(appDAO);
         };
+    }
+
+    private void createInstructorWithCourses(AppDAO appDAO) {
+        // create the instructor
+        Instructor tempInstructor = new Instructor("Boby", "Maulana", "boby.m@gmail.com");
+
+        // create the instructor detail
+        InstructorDetail tempInstructorDetail = new InstructorDetail(
+                "http://www.youtube.com/boby.m",
+                "Programming");
+
+        // associate the object 1 to 1 relationship
+        tempInstructor.setInstructorDetail(tempInstructorDetail);
+
+        // create some courses
+        Course tempCourse1 = new Course("Air Guitar - The Ultimate Guide");
+        Course tempCourse2 = new Course("The Magic Of Estenia");
+
+        // Add courses to instructor
+        tempInstructor.add(tempCourse1);
+        tempInstructor.add(tempCourse2);
+
+        // save the instructor and automatically also save the courses
+        System.out.println("Saving instructor: " + tempInstructor);
+        System.out.println("The Courses: " + tempInstructor.getCourses());
+        appDAO.save(tempInstructor);
+
+        System.out.println("Done");
     }
 
     private void deleteInstructorDetail(AppDAO appDAO) {
