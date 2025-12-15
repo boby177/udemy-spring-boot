@@ -30,7 +30,7 @@ public class Instructor {
 
     // New entity Course
     @OneToMany(mappedBy = "instructor",
-            fetch = FetchType.EAGER,
+            fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE,
                     CascadeType.DETACH, CascadeType.REFRESH})
     private List<Course> courses;
