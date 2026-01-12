@@ -44,12 +44,12 @@ public class CruddemoApplication {
 
         // find the course
         System.out.println("Finding course id: " + theId);
-        Course tempCourse = appDAO.findCOurseById(theId);
+        Course tempCourse = appDAO.findCourseById(theId);
 
         // update the course
         System.out.println("Updating course id " + theId);
         tempCourse.setTitle("Enjoy 3 your self");
-        
+
         appDAO.update(tempCourse);
 
         System.out.println("Done!");

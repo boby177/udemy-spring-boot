@@ -109,7 +109,7 @@ public class AppDAOImpl implements AppDAO {
     }
 
     @Override
-    public Course findCOurseById(int theId) {
+    public Course findCourseById(int theId) {
         return entityManager.find(Course.class, theId);
     }
 }
