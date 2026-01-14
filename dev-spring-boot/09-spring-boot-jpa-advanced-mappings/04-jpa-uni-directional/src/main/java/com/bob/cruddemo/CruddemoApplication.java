@@ -22,21 +22,8 @@ public class CruddemoApplication {
     public CommandLineRunner commandLineRunner(AppDAO appDAO) {
 
         return runner -> {
-            // findInstructor(appDAO);
-            // findInstructorDetail(appDAO);
-            // findInstructorWithCourses(appDAO);
-            // findCoursesForInstructor(appDAO);
-            // findInstructorWithCoursesJoinFetch(appDAO);
 
-            // createInstructor(appDAO);
-            // createInstructorWithCourses(appDAO);
 
-            // updateInstructor(appDAO);
-            // updateCourse(appDAO);
-
-            // deleteInstructor(appDAO);
-            // deleteInstructorDetail(appDAO);
-             deleteCourse(appDAO);
         };
     }
 
